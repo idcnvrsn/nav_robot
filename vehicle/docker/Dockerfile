@@ -2,6 +2,8 @@ FROM ubuntu:20.04
 
 ENV PYTHON_VERSION=3.9
 ENV LANG=en_US.UTF-8
+ENV ROS_DISTRO=noetic
+
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt update && apt install locales -y
@@ -51,10 +53,10 @@ RUN apt update && apt install -y \
 
 RUN apt update;
 RUN apt install python3-vcstool -y
-RUN apt install ros-noetic-desktop-full -y
-RUN apt install gazebo11 ros-noetic-gazebo-ros-pkgs -y
+RUN apt install ros-${ROS_DISTRO}-desktop-full -y
+RUN apt install gazebo11 ros-${ROS_DISTRO}-gazebo-ros-pkgs -y
 
-RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
+RUN echo "source /opt/ros/${ROS_DISTRO}/setup.bash" >> ~/.bashrc
 
 RUN apt-get update
 RUN apt-get install -y python3-wstool python3-rosdep ninja-build stow -y
@@ -63,33 +65,33 @@ RUN apt install python3-argcomplete -y
 RUN apt install python3-osrf-pycommon python3-catkin-tools -y
 
 RUN git clone https://github.com/ROBOTIS-GIT/robotis_tools.git
-RUN cd robotis_tools;chmod +x install_ros_noetic.sh;bash install_ros_noetic.sh
+RUN cd robotis_tools;chmod +x install_ros_${ROS_DISTRO}.sh;bash install_ros_${ROS_DISTRO}.sh
 
-RUN apt-get install ros-noetic-joy ros-noetic-teleop-twist-joy \
-  ros-noetic-teleop-twist-keyboard ros-noetic-laser-proc \
-  ros-noetic-rgbd-launch ros-noetic-depthimage-to-laserscan \
-  ros-noetic-rosserial-arduino ros-noetic-rosserial-python \
-  ros-noetic-rosserial-server ros-noetic-rosserial-client \
-  ros-noetic-rosserial-msgs ros-noetic-amcl ros-noetic-map-server \
-  ros-noetic-move-base ros-noetic-urdf ros-noetic-xacro \
-  ros-noetic-compressed-image-transport ros-noetic-rqt* \
-  ros-noetic-gmapping ros-noetic-navigation ros-noetic-interactive-markers -y
+RUN apt-get install ros-${ROS_DISTRO}-joy ros-${ROS_DISTRO}-teleop-twist-joy \
+  ros-${ROS_DISTRO}-teleop-twist-keyboard ros-${ROS_DISTRO}-laser-proc \
+  ros-${ROS_DISTRO}-rgbd-launch ros-${ROS_DISTRO}-depthimage-to-laserscan \
+  ros-${ROS_DISTRO}-rosserial-arduino ros-${ROS_DISTRO}-rosserial-python \
+  ros-${ROS_DISTRO}-rosserial-server ros-${ROS_DISTRO}-rosserial-client \
+  ros-${ROS_DISTRO}-rosserial-msgs ros-${ROS_DISTRO}-amcl ros-${ROS_DISTRO}-map-server \
+  ros-${ROS_DISTRO}-move-base ros-${ROS_DISTRO}-urdf ros-${ROS_DISTRO}-xacro \
+  ros-${ROS_DISTRO}-compressed-image-transport ros-${ROS_DISTRO}-rqt* \
+  ros-${ROS_DISTRO}-gmapping ros-${ROS_DISTRO}-navigation ros-${ROS_DISTRO}-interactive-markers -y
 
-RUN apt-get install ros-noetic-dynamixel-sdk -y
-RUN apt-get install ros-noetic-turtlebot3-msgs -y
-RUN apt-get install ros-noetic-turtlebot3 -y
+RUN apt-get install ros-${ROS_DISTRO}-dynamixel-sdk -y
+RUN apt-get install ros-${ROS_DISTRO}-turtlebot3-msgs -y
+RUN apt-get install ros-${ROS_DISTRO}-turtlebot3 -y
 
 RUN echo 'export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:~/turtlebot3_ws/src/turtlebot3/turtlebot3_simulations/turtlebot3_gazebo/models' >> ~/.bashrc
 RUN echo "export TURTLEBOT3_MODEL=burger" >> ~/.bashrc
 
 RUN mkdir -p ~/turtlebot3_ws/src;cd ~/turtlebot3_ws;wget https://raw.githubusercontent.com/ROBOTIS-GIT/turtlebot3/ros2/turtlebot3.repos;vcs import src < turtlebot3.repos;
-RUN cd ~/turtlebot3_ws/src/turtlebot3/turtlebot3_simulations;git checkout noetic-devel
-RUN cd ~/turtlebot3_ws/src/turtlebot3/turtlebot3;git checkout noetic-devel
-RUN cd ~/turtlebot3_ws/src/turtlebot3/turtlebot3_msgs;git checkout noetic-devel
-RUN cd ~/turtlebot3_ws/src/utils/hls_lfcd_lds_driver;git checkout noetic-devel
-RUN cd ~/turtlebot3_ws/src/utils/DynamixelSDK;git checkout noetic-devel
-RUN cd ~/turtlebot3_ws/src/utils/hls_lfcd_lds_driver;git checkout noetic-devel
-RUN . /opt/ros/noetic/setup.sh;cd ~/turtlebot3_ws;catkin build
+RUN cd ~/turtlebot3_ws/src/turtlebot3/turtlebot3_simulations;git checkout ${ROS_DISTRO}-devel
+RUN cd ~/turtlebot3_ws/src/turtlebot3/turtlebot3;git checkout ${ROS_DISTRO}-devel
+RUN cd ~/turtlebot3_ws/src/turtlebot3/turtlebot3_msgs;git checkout ${ROS_DISTRO}-devel
+RUN cd ~/turtlebot3_ws/src/utils/hls_lfcd_lds_driver;git checkout ${ROS_DISTRO}-devel
+RUN cd ~/turtlebot3_ws/src/utils/DynamixelSDK;git checkout ${ROS_DISTRO}-devel
+RUN cd ~/turtlebot3_ws/src/utils/hls_lfcd_lds_driver;git checkout ${ROS_DISTRO}-devel
+RUN . /opt/ros/${ROS_DISTRO}/setup.sh;cd ~/turtlebot3_ws;catkin build
 
 RUN echo "source ~/turtlebot3_ws/devel/setup.bash" >> ~/.bashrc
 
@@ -103,26 +105,26 @@ RUN echo "export TURTLEBOT3_MODEL=burger" >> ~/.bashrc
 #RUN cd ~/cartographer_ws; \
 #  rosdep init \
 #  rosdep update \
-#  rosdep install --from-paths src --ignore-src --rosdistro=noetic -y
+#  rosdep install --from-paths src --ignore-src --rosdistro=${ROS_DISTRO} -y
 
 #RUN cd ~/cartographer_ws;src/cartographer/scripts/install_abseil.sh; \
-#  apt-get remove ros-noetic-abseil-cpp -y; \
+#  apt-get remove ros-${ROS_DISTRO}-abseil-cpp -y; \
 #  catkin_make_isolated --install --use-ninja
 
-#RUN apt install ros-noetic-navigation2 -y
-#RUN apt install ros-noetic-nav2-bringup -y
+#RUN apt install ros-${ROS_DISTRO}-navigation2 -y
+#RUN apt install ros-${ROS_DISTRO}-nav2-bringup -y
 
-#RUN cp /root/turtlebot3_ws/src/turtlebot3/turtlebot3_simulations/turtlebot3_gazebo/launch/empty_world.launch.py /opt/ros/noetic/share/gazebo_ros/launch/empty_world.launch.py
+#RUN cp /root/turtlebot3_ws/src/turtlebot3/turtlebot3_simulations/turtlebot3_gazebo/launch/empty_world.launch.py /opt/ros/${ROS_DISTRO}/share/gazebo_ros/launch/empty_world.launch.py
 
 
 #RUN apt update;
 #RUN apt install \
-#  ros-noetic-ros-control \
-#  ros-noetic-gazebo-ros-control \
-#  ros-noetic-joint-state-controller \
-#  ros-noetic-ros-controllers \
-#  ros-noetic-effort-controllers \
-#  ros-noetic-joint-trajectory-controller \
-#  ros-noetic-moveit* \
-#  ros-noetic-octomap \
-#  ros-noetic-object-recognition-* -y
+#  ros-${ROS_DISTRO}-ros-control \
+#  ros-${ROS_DISTRO}-gazebo-ros-control \
+#  ros-${ROS_DISTRO}-joint-state-controller \
+#  ros-${ROS_DISTRO}-ros-controllers \
+#  ros-${ROS_DISTRO}-effort-controllers \
+#  ros-${ROS_DISTRO}-joint-trajectory-controller \
+#  ros-${ROS_DISTRO}-moveit* \
+#  ros-${ROS_DISTRO}-octomap \
+#  ros-${ROS_DISTRO}-object-recognition-* -y
