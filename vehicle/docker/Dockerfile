@@ -1,7 +1,7 @@
 FROM ubuntu:20.04
 
 ENV PYTHON_VERSION=3.9
-env LANG=en_US.UTF-8
+ENV LANG=en_US.UTF-8
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt update && apt install locales -y
