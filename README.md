@@ -19,8 +19,12 @@ cd nav_robot/vehicle/docker
 dockerイメージの起動
 ./run.sh
 
-urdfのテスト参考：
+urdfのテスト参考： 
 https://qiita.com/Ninagawa123/items/411746933d221cb43e9d
 
-urdfファイルのチェックにはcheck_urdfというツールが使える：
+urdfファイルのチェックにはcheck_urdfというツールが使える： 
 https://qiita.com/srs/items/35bbaadd6c4be1e39bb9#urdf%E3%81%AE%E3%83%81%E3%82%A7%E3%83%83%E3%82%AF
+
+ros2向けurdf_tutorial:
+https://github.com/ros/urdf_tutorial/tree/ros2?tab=readme-ov-file
+
