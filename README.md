@@ -28,3 +28,42 @@ https://qiita.com/srs/items/35bbaadd6c4be1e39bb9#urdf%E3%81%AE%E3%83%81%E3%82%A7
 ros2向けurdf_tutorial:
 https://github.com/ros/urdf_tutorial/tree/ros2?tab=readme-ov-file
 
+launchファイル実行例：
+
+```
+mkdir -p ~/happy_ws/src/chapter2
+cd ~/happy_ws/src/chapter2
+ros2 pkg create --build-type ament_python --node-name hello_node hello
+cd ~/happy_ws
+colcon build
+source install/setup.bash
+
+ros2 run hello hello_node
+
+mkdir -p ~/happy_ws/src/chapter2/hello/launch
+cd ~/happy_ws/src/chapter2/hello/launch
+
+echo -e "\
+from launch import LaunchDescription\n\
+from launch_ros.actions import Node\n\
+
+def generate_launch_description():\n\
+    return LaunchDescription([\n\
+        Node(\n\
+            package='hello',\n\
+            namespace='hello',\n\
+            executable='hello_node',\n\
+        ),\n\
+    ])" \
+> launch.py
+
+sed -i "13i ('share/' + package_name, ['launch/launch.py'])," ~/happy_ws/src/chapter2/hello/setup.py
+
+cd ~/happy_ws
+colcon build
+source install/setup.bash
+
+ros2 launch hello launch.py
+```
+
+
