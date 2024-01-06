@@ -76,3 +76,6 @@ https://github.com/IntelRealSense/realsense-ros
 
 realsenseをgazeboでシミュレーションするROSパッケージ(intel製ではなくサードパーティらしい)：  
 https://github.com/pal-robotics/realsense_gazebo_plugin/tree/foxy-devel?tab=readme-ov-file
+
+intel製のrealsense gazeboプラグイン（現在メンテナンスされてないらしい）：   
+https://github.com/intel/gazebo-realsense
