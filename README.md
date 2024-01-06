@@ -28,7 +28,7 @@ https://qiita.com/srs/items/35bbaadd6c4be1e39bb9#urdf%E3%81%AE%E3%83%81%E3%82%A7
 ros2向けurdf_tutorial:
 https://github.com/ros/urdf_tutorial/tree/ros2?tab=readme-ov-file
 
-ros2 launchファイル実行例：
+pythonのみを使うパッケージ(ビルドツールにament_pythonをしたしたとき)におけるros2 launchファイル実行例：
 
 ```
 mkdir -p ~/happy_ws/src/chapter2
