@@ -65,9 +65,9 @@ source install/setup.bash
 
 ros2 launch hello launch.py
 ```
-C++を使ったパッケージの開発のチュートリアル：  
+ros2におけるパッケージの開発のチュートリアル(C++,python)：  
 https://docs.ros.org/en/foxy/Tutorials/Beginner-Client-Libraries/Creating-Your-First-ROS2-Package.html
 
-ros2におけるlaunchファイル作成のチュートリアル：  
+ros2におけるlaunchファイル作成のチュートリアル(C++,python)：  
 https://docs.ros.org/en/foxy/Tutorials/Intermediate/Launch/Launch-system.html
 
