@@ -19,7 +19,7 @@ cd nav_robot/vehicle/docker
 dockerイメージの起動  
 ./run.sh
 
-urdfのテスト参考： 
+urdfのテスト参考：  
 https://qiita.com/Ninagawa123/items/411746933d221cb43e9d
 
 urdfファイルのチェックにはcheck_urdfというツールが使える： 
