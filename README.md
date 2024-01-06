@@ -16,7 +16,7 @@ dockerイメージのビルド
 cd nav_robot/vehicle/docker  
 ./build.sh  
 
-dockerイメージの起動
+dockerイメージの起動  
 ./run.sh
 
 urdfのテスト参考： 
