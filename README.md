@@ -71,3 +71,8 @@ https://docs.ros.org/en/foxy/Tutorials/Beginner-Client-Libraries/Creating-Your-F
 ros2におけるlaunchファイル作成のチュートリアル(C++,python)：  
 https://docs.ros.org/en/foxy/Tutorials/Intermediate/Launch/Launch-system.html
 
+realsenseのROSパッケージ：  
+https://github.com/IntelRealSense/realsense-ros
+
+realsenseをgazeboでシミュレーションするROSパッケージ(intel製ではなくサードパーティらしい)：  
+https://github.com/pal-robotics/realsense_gazebo_plugin/tree/foxy-devel?tab=readme-ov-file
