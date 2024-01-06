@@ -12,9 +12,9 @@ curl -fsSL get.docker.com -o get-docker.sh && \ # ダウンロード
 参考：
 https://qiita.com/KEINOS/items/bdc9450c1a88c210aa88
 
-dockerイメージのビルド 
-cd nav_robot/vehicle/docker 
-./build.sh 
+dockerイメージのビルド  
+cd nav_robot/vehicle/docker  
+./build.sh  
 
 dockerイメージの起動
 ./run.sh
