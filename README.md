@@ -82,6 +82,11 @@ sdf関係のチュートリアル例：
 https://classic.gazebosim.org/tutorials?tut=build_model&cat=build_robot
 https://classic.gazebosim.org/tutorials?tut=build_robot&cat=build_robot
 
+gazebo world
+gazeboによるチュートリアル：  
+https://classic.gazebosim.org/tutorials?tut=build_world&cat=build_world
+https://classic.gazebosim.org/tutorials?tut=modifying_world&cat=build_world
+
 ■RealSense関係
 realsenseのROSパッケージ：  
 https://github.com/IntelRealSense/realsense-ros
