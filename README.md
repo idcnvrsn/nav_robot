@@ -74,6 +74,14 @@ https://docs.ros.org/en/foxy/Tutorials/Intermediate/Launch/Launch-system.html
 rosパッケージの検索サイト:  
 https://index.ros.org/
 
+sdfファイルについて：  
+sdfファイルフォーマットに関するまとまった資料が見当たらないようだが例えばgazebo tutrialなどに
+gazeboチュートリアルブラウズページ
+https://classic.gazebosim.org/tutorials/browse
+sdf関係のチュートリアル例：
+https://classic.gazebosim.org/tutorials?tut=build_model&cat=build_robot
+https://classic.gazebosim.org/tutorials?tut=build_robot&cat=build_robot
+
 ■RealSense関係
 realsenseのROSパッケージ：  
 https://github.com/IntelRealSense/realsense-ros
