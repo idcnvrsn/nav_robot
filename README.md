@@ -97,4 +97,5 @@ https://github.com/pal-robotics/realsense_gazebo_plugin/tree/foxy-devel?tab=read
 intel製のrealsense gazeboプラグイン（現在メンテナンスされてないらしい）：   
 https://github.com/intel/gazebo-realsense
 
-
+RealSenseが出力したPointCloudをLaserScanに変換するパッケージ：  
+https://github.com/ros-perception/pointcloud_to_laserscan
