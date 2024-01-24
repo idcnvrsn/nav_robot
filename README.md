@@ -19,7 +19,8 @@ cd nav_robot/vehicle/docker
 dockerイメージの起動  
 ./run.sh
 
-./avoider.sh
+ナビゲーションの実行：  
+./avoider.sh  
 を実行してナビゲーションを実行する。
 
 ■役立ちそうな情報へのリンク
