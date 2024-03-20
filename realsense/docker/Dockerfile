@@ -92,6 +92,12 @@ RUN cd ~/ros2_ws/src && \
       source /opt/ros/$ROS_DISTRO/setup.bash && \
       colcon build  --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Debug --packages-select pointcloud_to_laserscan
 
+RUN cd ~/ros2_ws/src && \
+      git clone https://github.com/ros-perception/depthimage_to_laserscan.git -b foxy-devel && \
+      cd ~/ros2_ws/ && \
+      source /opt/ros/$ROS_DISTRO/setup.bash  && \
+      colcon build  --symlink-install  --packages-select depthimage_to_laserscan
+
 RUN echo source ~/ros2_ws/install/setup.bash >> ~/.bashrc
 RUN echo source /opt/ros/$ROS_DISTRO/setup.bash >> ~/.bashrc
 RUN echo source /usr/share/gazebo/setup.bash >> ~/.bashrc
