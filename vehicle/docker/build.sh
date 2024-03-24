@@ -1,4 +1,4 @@
-BASENAME=vehicle
+BASENAME=vehicle_ros2
 
 docker buildx build \
   --build-arg HTTP_PROXY=${HTTP_PROXY} \

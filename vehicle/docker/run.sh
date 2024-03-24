@@ -15,7 +15,7 @@ docker run \
  -v $PWD/../..:/work/share \
  -v $HOME/.gazebo:$HOME/.gazebo \
  -v $HOME/.bash_history:/root/.bash_history \
- -w /work/share/${BASENAME} \
+ -w /work/share/vehicle \
   -v /etc/localtime:/etc/localtime:ro \
   --env NVIDIA_DRIVER_CAPABILITIES=video,compute,utility \
   --env NVIDIA_VISIBLE_DEVICES=$GPU \
