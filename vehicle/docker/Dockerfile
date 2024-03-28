@@ -27,6 +27,8 @@ RUN mkdir -p ~/turtlebot3_ws/src && cd ~/turtlebot3_ws/src && \
   source /opt/ros/$ROS_DISTRO/setup.bash && \
   colcon build --symlink-install
 
+RUN apt install nano -y
+
 RUN echo 'export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:~/turtlebot3_ws/src/turtlebot3/turtlebot3_simulations/turtlebot3_gazebo/models' >> ~/.bashrc
 RUN echo source /opt/ros/$ROS_DISTRO/setup.bash >> ~/.bashrc
 RUN echo "source ~/turtlebot3_ws/install/setup.bash" >> ~/.bashrc
