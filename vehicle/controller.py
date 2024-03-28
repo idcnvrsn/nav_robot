@@ -1,4 +1,4 @@
-import rospy
+import rospy2 as rospy
 
 # from std_msgs.msg import Int32
 from geometry_msgs.msg import PoseStamped
@@ -25,8 +25,8 @@ def get_goal(x, y, rad):
     goal.pose.position.x = x
     goal.pose.position.y = y
     goal.pose.orientation.w = math.cos(rad/2)
-    goal.pose.orientation.x = 0
-    goal.pose.orientation.y = 0
+    goal.pose.orientation.x = 0.0
+    goal.pose.orientation.y = 0.0
     goal.pose.orientation.z = math.sin(rad/2)
     return goal
 
