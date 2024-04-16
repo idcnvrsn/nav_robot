@@ -1,105 +1,86 @@
-import rospy2 as rospy
+#! /usr/bin/env python3
 
-# from std_msgs.msg import Int32
 from geometry_msgs.msg import PoseStamped
-from actionlib_msgs.msg import GoalStatusArray
+from nav2_simple_commander.robot_navigator import BasicNavigator, TaskResult
+import rclpy
+from rclpy.duration import Duration
 import random
-import math
 
-# goals=[[-1.0,1.6],[0.0,1.5],[-1.0,-0.5],[0.0,-0.5],[-1.0,-2.0],[0.0,-2.0],[2.0,-0.5],[-2.0,-0.5]]
-# goals=[[2.0,1.0],[2.0,-1.0]]
+class RandomNavigator:
+    def __init__(self):
+        rclpy.init()
+        self.navigator = BasicNavigator()
 
-goals=[]
-for y in [-1.0, 0.0, 1.0, 2.0]:
-    for x in [0.5, 1.5, 2.5]:
-        goals.append([x,y])
-goal_set=False
+        # Set our demo's initial pose
+        initial_pose = PoseStamped()
+        initial_pose.header.frame_id = 'map'
+        initial_pose.header.stamp = self.navigator.get_clock().now().to_msg()
+        initial_pose.pose.position.x = 0.0
+        initial_pose.pose.position.y = 0.0
+        initial_pose.pose.orientation.z = 0.0
+        initial_pose.pose.orientation.w = 1.0
+        self.navigator.setInitialPose(initial_pose)
 
-rospy.init_node('controller')
-pub_goal = rospy.Publisher('move_base_simple/goal', PoseStamped, queue_size=1)
+        self.navigator.waitUntilNav2Active()
 
-def get_goal(x, y, rad):
-    goal = PoseStamped()
-    goal.header.stamp=rospy.Time.now()
-    goal.header.frame_id="map"
-    goal.pose.position.x = x
-    goal.pose.position.y = y
-    goal.pose.orientation.w = math.cos(rad/2)
-    goal.pose.orientation.x = 0.0
-    goal.pose.orientation.y = 0.0
-    goal.pose.orientation.z = math.sin(rad/2)
-    return goal
+    def run(self):
+        while True:
+            # Generate random goal pose
+            goal_pose = self.generate_random_pose()
 
-goal=get_goal(0.0,0.0, 0)
+            self.navigator.goToPose(goal_pose)
 
-def callback(msg):
-    global goal_set
-    global goal
+            while not self.navigator.isTaskComplete():
+                # Implement obstacle avoidance here if needed
 
-    if len(msg.status_list) == 0:
-        status = None
-    else:
-        status = msg.status_list[0].status
-    if (status == 3) or (status == 4) or (status == None):
-        if goal_set==False:
-            idx=random.randint(0, len(goals))
-            x=goals[idx][0]
-            y=goals[idx][1]
-            goal=get_goal(x, y, math.atan2(y-0.5,x-2.0))
-            goal_set=True
-        pub_goal.publish(goal)
-    else:
-        goal_set=False
+                # Do something with the feedback
+                feedback = self.navigator.getFeedback()
+                if feedback:
+                    print(
+                        'Estimated time of arrival: '
+                        + '{0:.0f}'.format(
+                            Duration.from_msg(feedback.estimated_time_remaining).nanoseconds
+                            / 1e9
+                        )
+                        + ' seconds.'
+                    )
 
-    print(status, goal)#, goal_set)
+                    # Some navigation timeout to demo cancellation
+                    if Duration.from_msg(feedback.navigation_time) > Duration(seconds=600.0):
+                        self.navigator.cancelTask()
 
+                    # Some navigation request change to demo preemption
+                    if Duration.from_msg(feedback.navigation_time) > Duration(seconds=18.0):
+                        goal_pose = self.generate_random_pose()
+                        self.navigator.goToPose(goal_pose)
 
-sub = rospy.Subscriber('/move_base/status', GoalStatusArray, callback)
-rospy.spin()
+            # Do something depending on the return code
+            result = self.navigator.getResult()
+            if result == TaskResult.SUCCEEDED:
+                print('Goal succeeded!')
+            elif result == TaskResult.CANCELED:
+                print('Goal was canceled!')
+            elif result == TaskResult.FAILED:
+                print('Goal failed!')
+            else:
+                print('Goal has an invalid return status!')
 
+    def generate_random_pose(self):
+        goal_pose = PoseStamped()
+        goal_pose.header.frame_id = 'map'
+        goal_pose.header.stamp = self.navigator.get_clock().now().to_msg()
+        goal_pose.pose.position.x = random.choice([0.5, 1.5, 2.5, 3.5])#[0.0, 1.0, 2.0, 3.0])
+        goal_pose.pose.position.y = random.choice([-1.0, 0.0, 1.0, 2.0])#[0.0, 1.0])
+        goal_pose.pose.orientation.w = 1.0
+        return goal_pose
 
+    def shutdown(self):
+        self.navigator.lifecycleShutdown()
+        rclpy.shutdown()
 
-# goal = PoseStamped()
-# goal.header.stamp=rospy.Time.now()
-# goal.header.frame_id="map"
-# goal.pose.position.x = -1.0
-# goal.pose.position.y = -0.5
-# goal.pose.orientation.w = 1.0
-
-# rate = rospy.Rate(2)
-# count = 0
-# while not rospy.is_shutdown():
-#     if count < 2:
-#         pub_goal.publish(goal)
-#         rate.sleep()
-#     else:
-#         break
-#     count+=1
-
-
-
-
-# while not rospy.is_shutdown():
-# pub_goal.publish(goal)
-
-
-
-
-
-
-# from std_msgs.msg import String
-# pub = rospy.Publisher('chatter', String, queue_size=1)
-
-# while not rospy.is_shutdown():
-#     pub.publish('hello')
-
-
-#  '{header: {frame_id: map}, pose: {pose: {position: {x: -2.0, y: -0.5}, orientation: {w: 1}}}}'
-
-# rate = rospy.Rate(2)
-
-# count = 0
-# while not rospy.is_shutdown():
-#     pub.publish(count)
-#     count += 1
-#     rate.sleep()
+if __name__ == '__main__':
+    navigator = RandomNavigator()
+    try:
+        navigator.run()
+    finally:
+        navigator.shutdown()
