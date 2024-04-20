@@ -32,6 +32,8 @@ RUN apt install nano -y
 RUN cd ~ && git clone https://github.com/dheera/rospy2.git && cd ~/rospy2 && \
   python3 setup.py install
 
+RUN apt-get install ros-humble-urdf-tutorial ros-humble-urdf-launch -y
+
 RUN echo 'export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:~/turtlebot3_ws/src/turtlebot3/turtlebot3_simulations/turtlebot3_gazebo/models' >> ~/.bashrc
 RUN echo source /opt/ros/$ROS_DISTRO/setup.bash >> ~/.bashrc
 RUN echo "source ~/turtlebot3_ws/install/setup.bash" >> ~/.bashrc
