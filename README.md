@@ -1,5 +1,8 @@
 # nav_robot
 
+■準備  
+Windows上のWSL2かUbuntuを用意する。
+
 ■使い方  
 docker-ceのインストール
 
