@@ -85,14 +85,14 @@ rosパッケージの検索サイト:
 https://index.ros.org/
 
 sdfファイルについて：  
-sdfファイルフォーマットに関するまとまった資料が見当たらないようだが例えばgazebo tutrialなどに
-gazeboチュートリアルブラウズページ
+sdfファイルフォーマットに関するまとまった資料が見当たらないようだが例えばgazebo tutrialなどに  
+gazeboチュートリアルブラウズページ  
 https://classic.gazebosim.org/tutorials/browse
-sdf関係のチュートリアル例：
+sdf関係のチュートリアル例：  
 https://classic.gazebosim.org/tutorials?tut=build_model&cat=build_robot
 https://classic.gazebosim.org/tutorials?tut=build_robot&cat=build_robot
 
-gazebo world
+gazebo world  
 gazeboによるチュートリアル：  
 https://classic.gazebosim.org/tutorials?tut=build_world&cat=build_world
 https://classic.gazebosim.org/tutorials?tut=modifying_world&cat=build_world
