@@ -1,4 +1,9 @@
 rqt_graph &
-rqt_console &
-rqt_logger_level &
-rqt_plot &
+ros2 run rqt_console rqt_console &
+#rqt_logger_level &
+ros2 run rqt_plot rqt_plot &
+rqt &
+ros2 run rqt_image_view rqt_image_view &
+rqt_bag &
+ros2 run rqt_gui rqt_gui &
+ros2 run rqt_reconfigure rqt_reconfigure &
