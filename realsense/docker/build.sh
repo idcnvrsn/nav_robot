@@ -1,9 +1,10 @@
 #!/bin/bash
-
+ROS_DISTRO=humble
 BASENAME=realsense
 DOCKERFILE=${1:-Dockerfile}
 
 docker buildx build \
+  --build-arg ROS_DISTRO=${ROS_DISTRO} \
   --build-arg NGC_TAG=${NGC_TAG} \
   --build-arg http_proxy=${http_proxy} \
   --build-arg https_proxy=${https_proxy} \

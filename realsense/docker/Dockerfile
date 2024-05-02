@@ -1,5 +1,5 @@
-# FROM ubuntu:22.04
-FROM ros:humble-perception
+ARG ROS_DISTRO
+FROM ros:${ROS_DISTRO}-perception
 
 ENV DEBIAN_FRONTEND noninteractive
 
