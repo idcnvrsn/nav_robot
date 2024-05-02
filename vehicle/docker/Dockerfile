@@ -1,12 +1,12 @@
 ARG ROS_DISTRO
-FROM ros:${ROS_DISTRO}-perception
+FROM osrf/ros:${ROS_DISTRO}-desktop-full
 
 SHELL ["/bin/bash", "-c"]
 
 RUN ln -s /usr/bin/python3 /usr/bin/python
 
 RUN apt update
-RUN apt install ros-${ROS_DISTRO}-desktop-full -y
+# RUN apt install ros-${ROS_DISTRO}-desktop-full -y
 RUN apt install terminator -y
 
 RUN apt install ros-${ROS_DISTRO}-gazebo-* -y
