@@ -1,5 +1,5 @@
 ARG ROS_DISTRO
-FROM ros:${ROS_DISTRO}-perception
+FROM osrf/ros:${ROS_DISTRO}-desktop-full
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -24,11 +24,16 @@ RUN apt install nano -y
 RUN apt-get install ros-$ROS_DISTRO-realsense2-camera -y
 
 RUN apt install ros-${ROS_DISTRO}-ament-cmake-clang-format -y
-RUN mkdir -p ~/ros2_ws/src && cd ~/ros2_ws/src && \
+
+RUN mkdir -p ~/ros2_ws/src
+RUN cd ~/ros2_ws/src && \
       git clone https://github.com/IntelRealSense/realsense-ros.git -b ros2-development && \
-      git clone https://github.com/pal-robotics/realsense_gazebo_plugin.git -b foxy-devel && \
+      source /opt/ros/$ROS_DISTRO/setup.bash && \
       cd ~/ros2_ws && \
-      sed -i '31i <build_type>ament_cmake</build_type>' ~/ros2_ws/src/realsense_gazebo_plugin/package.xml && \
+      colcon build --symlink-install
+
+RUN cd ~/ros2_ws/src && \
+      git clone https://github.com/pal-robotics/realsense_gazebo_plugin.git -b foxy-devel && \
       source /opt/ros/$ROS_DISTRO/setup.bash && \
       cd ~/ros2_ws && \
       colcon build --symlink-install
