@@ -16,8 +16,8 @@ RUN apt install ros-${ROS_DISTRO}-nav2-bringup -y
 RUN apt install gazebo -y
 
 RUN apt install ros-${ROS_DISTRO}-dynamixel-sdk \
-                  ros-${ROS_DISTRO}-turtlebot3-msgs \
-                  ros-${ROS_DISTRO}-turtlebot3 -y
+                ros-${ROS_DISTRO}-turtlebot3-msgs \
+                ros-${ROS_DISTRO}-turtlebot3 -y
 
 RUN apt install ros-$ROS_DISTRO-turtlebot3-gazebo -y
 
