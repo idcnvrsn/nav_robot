@@ -46,8 +46,7 @@ RUN cd ~/ros2_ws/src && \
     git clone https://github.com/koichirokato/gazebo_sensor_ros2 && \
     cd ~/ros2_ws && \
     source /opt/ros/$ROS_DISTRO/setup.bash && \
-    colcon build --symlink-install && \
-    source install/setup.bash
+    colcon build --symlink-install
 
 RUN export GAZEBO_MODEL_PATH=~/ros2_ws/install/realsense2_description/share/realsense2_description/meshes/:$GAZEBO_MODEL_PATH
 
