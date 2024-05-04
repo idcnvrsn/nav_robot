@@ -51,12 +51,6 @@ RUN cd ~/ros2_ws/src && \
     colcon build --symlink-install && \
     source install/setup.bash
 
-RUN cd ~/ros2_ws/src && \
-    git clone https://github.com/ros-perception/depthimage_to_laserscan.git -b foxy-devel && \
-    cd ~/ros2_ws/ && \
-    source /opt/ros/$ROS_DISTRO/setup.bash  && \
-    colcon build  --symlink-install  --packages-select depthimage_to_laserscan
-
 RUN export GAZEBO_MODEL_PATH=~/ros2_ws/install/realsense2_description/share/realsense2_description/meshes/:$GAZEBO_MODEL_PATH
 
 RUN echo 'export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:~/turtlebot3_ws/src/turtlebot3/turtlebot3_simulations/turtlebot3_gazebo/models' >> ~/.bashrc
