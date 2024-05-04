@@ -25,8 +25,6 @@ RUN apt install nano -y
 
 RUN apt-get install ros-humble-urdf-tutorial ros-humble-urdf-launch -y
 
-RUN apt-get install liburdfdom-tools -y
-
 RUN apt install ros-humble-rqt-tf-tree -y
 
 RUN apt-get install ros-$ROS_DISTRO-realsense2-camera -y
