@@ -68,3 +68,5 @@ RUN mkdir -p /etc/xdg/terminator && touch /etc/xdg/terminator/config
 
 RUN echo "source /usr/share/colcon_cd/function/colcon_cd.sh" >> ~/.bashrc
 RUN echo "export _colcon_cd_root=/opt/ros/humble/" >> ~/.bashrc
+
+RUN apt-get update -y && apt-get install -y x11-apps
