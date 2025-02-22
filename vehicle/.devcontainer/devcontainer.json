@@ -1,0 +1,44 @@
+{
+    "name": "Development",
+    "build": {
+        "dockerfile": "../docker/Dockerfile",
+        "context": ".",
+        "args": {"ROS_DISTRO":"humble"}
+    },
+    "runArgs": [
+        "--net", "host",
+        "--env", "DISPLAY=:0",
+        "--env", "XDG_RUNTIME_DIR=/tmp/runtime-$USER",
+        "--volume", "/tmp/.X11-unix:/tmp/.X11-unix:rw"
+    ],
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "files.trimTrailingWhitespace": true,
+                "files.insertFinalNewline": true,
+                "flake8.enabled": true,
+                "flake8.args":
+                [
+                    "--max-line-length=120",
+                    "--ignore=E111, E114, E402, E501"
+                ]
+            },
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "oderwat.indent-rainbow",
+                "ms-python.flake8",
+                "ms-azuretools.vscode-docker",
+                "mushan.vscode-paste-image",
+                "mosapride.zenkaku",
+                "christian-kohler.path-intellisense",
+                "usernamehw.errorlens",
+                "ms-python.autopep8",
+                "ms-python.isort"
+            ]
+        }
+    },
+    "remoteUser": "develop"
+    // "postCreateCommand": "bash ../docker/entrypoint.sh"
+
+}
