@@ -19,9 +19,14 @@
                 "flake8.enabled": true,
                 "flake8.args":
                 [
-                    "--max-line-length=120",
-                    "--ignore=E111, E114, E402, E501"
-                ]
+                    "--max-line-length=200",
+                    "--ignore=E111, E114, E302, E402, E501"
+                ],
+                "autopep8.args":
+                [
+                    "--max-line-length=200",
+                    "--ignore=E111, E114, E302, E402, E501"
+            ]
             },
             "extensions": [
                 "ms-python.python",
@@ -34,7 +39,8 @@
                 "christian-kohler.path-intellisense",
                 "usernamehw.errorlens",
                 "ms-python.autopep8",
-                "ms-python.isort"
+                "ms-python.isort",
+                "ms-iot.vscode-ros"
             ]
         }
     },
