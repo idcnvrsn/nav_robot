@@ -1,4 +1,4 @@
-ARG ROS_DISTRO
+ARG ROS_DISTRO="ROS_DISTRO"
 FROM osrf/ros:${ROS_DISTRO}-desktop-full
 
 SHELL ["/bin/bash", "-c"]
@@ -70,3 +70,15 @@ RUN echo "source /usr/share/colcon_cd/function/colcon_cd.sh" >> ~/.bashrc
 RUN echo "export _colcon_cd_root=/opt/ros/humble/" >> ~/.bashrc
 
 RUN apt-get update -y && apt-get install -y x11-apps
+
+ARG USERNAME=develop
+ARG USER_UID=1000
+ARG USER_GID=$USER_UID
+
+RUN groupadd --gid $USER_GID $USERNAME \
+    && useradd -s /bin/bash --uid $USER_UID --gid $USER_GID -m $USERNAME \
+    && apt-get install -y sudo \
+    && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME\
+    && chmod 0440 /etc/sudoers.d/$USERNAME
+
+USER develop
