@@ -102,5 +102,6 @@ cp src/$PACKAGE_NAME/launch/sample_launch.py install/my_robot/share/my_robot
 
 echo "ワークスペース '$WORKSPACE_NAME'、パッケージ '$PACKAGE_NAME' の作成、ビルド、インストールが完了しました。"
 
+# worldファイルを読む都合上、パッケージ直下のworldディレクトリに移動し、
 # 以下コマンドでlaunchファイルを実行できる。
 # ros2 launch my_robot sample_launch.py
