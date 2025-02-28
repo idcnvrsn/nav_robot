@@ -48,10 +48,53 @@ def generate_launch_description():
     ])
 EOF
 
+# launch ディレクトリの作成
+mkdir -p src/$PACKAGE_NAME/world
+
+# サンプル world ファイルの作成
+cat << EOF > src/$PACKAGE_NAME/world/my_custom_world.world
+<?xml version="1.0" ?>
+<sdf version="1.7">
+  <world name="custom_world">
+    <!-- 環境の光 -->
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+    <!-- 地面 -->
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+
+    <!-- 壁モデル -->
+    <model name="wall">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>5 0.1 2</size> <!-- X, Y, Zサイズ -->
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>5 0.1 2</size>
+            </box>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+
+  </world>
+</sdf>
+EOF
+
 # ビルド
 colcon build
 
-# インストール
+# インストール たまに失敗する？
 source install/local_setup.bash
 
 # launchファイルのコピー
