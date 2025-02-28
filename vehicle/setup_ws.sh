@@ -58,3 +58,6 @@ source install/local_setup.bash
 cp src/$PACKAGE_NAME/launch/sample_launch.py install/my_robot/share/my_robot
 
 echo "ワークスペース '$WORKSPACE_NAME'、パッケージ '$PACKAGE_NAME' の作成、ビルド、インストールが完了しました。"
+
+# 以下コマンドでlaunchファイルを実行できる。
+# ros2 launch my_robot sample_launch.py
