@@ -71,6 +71,17 @@ RUN echo "export _colcon_cd_root=/opt/ros/humble/" >> ~/.bashrc
 
 RUN apt-get update -y && apt-get install -y x11-apps
 
+# Rust と cargo のインストール先を変更するための環境変数を設定
+# CARGO_HOME と RUSTUP_HOME を変更
+ENV CARGO_HOME=/opt/rust/cargo
+ENV RUSTUP_HOME=/opt/rust/rustup
+
+# rustup をインストールして rust と cargo をセットアップ
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+ENV PATH="${CARGO_HOME}/bin:${PATH}"
+
+RUN cargo install urdf-viz
+
 ARG USERNAME=develop
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
