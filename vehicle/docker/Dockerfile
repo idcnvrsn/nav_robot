@@ -59,7 +59,7 @@ RUN export GAZEBO_MODEL_PATH=~/ros2_ws/install/realsense2_description/share/real
 
 RUN echo 'export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:~/turtlebot3_ws/src/turtlebot3/turtlebot3_simulations/turtlebot3_gazebo/models' >> ~/.bashrc
 RUN echo source ~/ros2_ws/install/setup.bash >> ~/.bashrc
-RUN echo source /opt/ros/$ROS_DISTRO/setup.bash >> ~/.bashrc
+# RUN echo source /opt/ros/$ROS_DISTRO/setup.bash >> ~/.bashrc
 RUN echo "source /usr/share/gazebo/setup.sh" >> ~/.bashrc
 
 RUN echo "export TURTLEBOT3_MODEL=burger" >> ~/.bashrc
@@ -81,6 +81,11 @@ RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 ENV PATH="${CARGO_HOME}/bin:${PATH}"
 
 RUN cargo install urdf-viz
+
+# entrypoint.shスクリプトをコンテナに追加
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh", "/bin/bash"]
 
 ARG USERNAME=develop
 ARG USER_UID=1000

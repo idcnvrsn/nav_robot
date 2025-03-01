@@ -2,7 +2,7 @@
     "name": "Development",
     "build": {
         "dockerfile": "../docker/Dockerfile",
-        "context": ".",
+        "context": "../docker",
         "args": {"ROS_DISTRO":"humble"}
     },
     "runArgs": [
@@ -44,7 +44,6 @@
             ]
         }
     },
-    "remoteUser": "develop"
-    // "postCreateCommand": "bash ../docker/entrypoint.sh"
-
+    "remoteUser": "develop",
+    "postCreateCommand": "docker/entrypoint.sh && /bin/bash"
 }
