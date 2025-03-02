@@ -36,13 +36,13 @@ RUN cd ~/ros2_ws/src && \
     cd ~/ros2_ws && \
     colcon build --symlink-install
 
-RUN cd ~/ros2_ws/src && \
+RUN mkdir -p /opt/ros2_ws/src
+RUN cd /opt/ros2_ws/src && \
     git clone https://github.com/pal-robotics/realsense_gazebo_plugin.git -b foxy-devel && \
     source /opt/ros/$ROS_DISTRO/setup.bash && \
-    cd ~/ros2_ws && \
+    cd /opt/ros2_ws && \
     colcon build --symlink-install
 
-RUN mkdir -p /opt/ros2_ws/src
 RUN cd /opt/ros2_ws/src && \
     git clone https://github.com/koichirokato/gazebo_sensor_ros2 && \
     cd ~/ros2_ws && \
