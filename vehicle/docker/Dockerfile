@@ -29,14 +29,16 @@ RUN apt install ros-humble-rqt-tf-tree -y
 
 RUN apt-get install ros-$ROS_DISTRO-realsense2-camera -y
 
-RUN mkdir -p ~/ros2_ws/src
-RUN cd ~/ros2_ws/src && \
-    git clone https://github.com/IntelRealSense/realsense-ros.git -b ros2-development && \
-    source /opt/ros/$ROS_DISTRO/setup.bash && \
-    cd ~/ros2_ws && \
-    colcon build --symlink-install
+RUN apt-get update && apt-get upgrade -y && apt-get dist-upgrade -y
+RUN apt-get install libssl-dev libusb-1.0-0-dev libudev-dev pkg-config libgtk-3-dev -y
 
 RUN mkdir -p /opt/ros2_ws/src
+RUN cd /opt/ros2_ws/src && \
+    git clone https://github.com/IntelRealSense/realsense-ros.git && \
+    source /opt/ros/$ROS_DISTRO/setup.bash && \
+    cd /opt/ros2_ws && \
+    colcon build --symlink-install
+
 RUN cd /opt/ros2_ws/src && \
     git clone https://github.com/pal-robotics/realsense_gazebo_plugin.git -b foxy-devel && \
     source /opt/ros/$ROS_DISTRO/setup.bash && \
@@ -45,7 +47,6 @@ RUN cd /opt/ros2_ws/src && \
 
 RUN cd /opt/ros2_ws/src && \
     git clone https://github.com/koichirokato/gazebo_sensor_ros2 && \
-    cd ~/ros2_ws && \
     cd /opt/ros2_ws && \
     source /opt/ros/$ROS_DISTRO/setup.bash && \
     colcon build --symlink-install
@@ -56,11 +57,6 @@ RUN cd /opt/ros2_ws/src && \
     source /opt/ros/$ROS_DISTRO/setup.bash && \
     rosdep install --from-paths src --ignore-src --rosdistro $ROS_DISTRO -y && \
     colcon build --symlink-install
-
-RUN export GAZEBO_MODEL_PATH=~/ros2_ws/install/realsense2_description/share/realsense2_description/meshes/:$GAZEBO_MODEL_PATH
-
-RUN echo 'export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:~/turtlebot3_ws/src/turtlebot3/turtlebot3_simulations/turtlebot3_gazebo/models' >> ~/.bashrc
-RUN echo source ~/ros2_ws/install/setup.bash >> ~/.bashrc
 
 RUN mkdir -p /etc/xdg/terminator && touch /etc/xdg/terminator/config
 RUN apt-get update -y && apt-get install -y x11-apps
