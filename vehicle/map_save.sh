@@ -6,6 +6,8 @@ terminator -e "ros2 launch slam_toolbox online_async_launch.py params_file:=slam
 terminator -e "ros2 run rviz2 rviz2 -d $(ros2 pkg prefix nav2_bringup)/share/nav2_bringup/rviz/nav2_default_view.rviz" &
 terminator -e "ros2 run turtlebot3_teleop teleop_keyboard" &
 
-# map保存は以下を実施する。 上書き保存はできない模様
+# teleopでworld内を動き回って、マップを作る。
+
+# 以下を実施してmap保存する。 既存ファイルの上書き保存はできない模様
 # ros2 run nav2_map_server map_saver_cli -f my_map
 
