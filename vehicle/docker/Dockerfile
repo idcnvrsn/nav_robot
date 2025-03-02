@@ -42,13 +42,14 @@ RUN cd ~/ros2_ws/src && \
     cd ~/ros2_ws && \
     colcon build --symlink-install
 
-RUN cd ~/ros2_ws/src && \
+RUN mkdir -p /opt/ros2_ws/src
+RUN cd /opt/ros2_ws/src && \
     git clone https://github.com/koichirokato/gazebo_sensor_ros2 && \
     cd ~/ros2_ws && \
+    cd /opt/ros2_ws && \
     source /opt/ros/$ROS_DISTRO/setup.bash && \
     colcon build --symlink-install
 
-RUN mkdir -p /opt/ros2_ws/src
 RUN cd /opt/ros2_ws/src && \
     git clone https://github.com/yadunund/view_sdf_rviz && \
     cd /opt/ros2_ws && \
