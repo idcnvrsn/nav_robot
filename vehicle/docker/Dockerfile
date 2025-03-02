@@ -48,9 +48,10 @@ RUN cd ~/ros2_ws/src && \
     source /opt/ros/$ROS_DISTRO/setup.bash && \
     colcon build --symlink-install
 
-RUN cd ~/ros2_ws/src && \
+RUN mkdir -p /opt/ros2_ws/src
+RUN cd /opt/ros2_ws/src && \
     git clone https://github.com/yadunund/view_sdf_rviz && \
-    cd ~/ros2_ws && \
+    cd /opt/ros2_ws && \
     source /opt/ros/$ROS_DISTRO/setup.bash && \
     rosdep install --from-paths src --ignore-src --rosdistro $ROS_DISTRO -y && \
     colcon build --symlink-install
