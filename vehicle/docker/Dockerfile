@@ -59,16 +59,8 @@ RUN export GAZEBO_MODEL_PATH=~/ros2_ws/install/realsense2_description/share/real
 
 RUN echo 'export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:~/turtlebot3_ws/src/turtlebot3/turtlebot3_simulations/turtlebot3_gazebo/models' >> ~/.bashrc
 RUN echo source ~/ros2_ws/install/setup.bash >> ~/.bashrc
-# RUN echo source /opt/ros/$ROS_DISTRO/setup.bash >> ~/.bashrc
-RUN echo "source /usr/share/gazebo/setup.sh" >> ~/.bashrc
-
-RUN echo "export TURTLEBOT3_MODEL=burger" >> ~/.bashrc
 
 RUN mkdir -p /etc/xdg/terminator && touch /etc/xdg/terminator/config
-
-RUN echo "source /usr/share/colcon_cd/function/colcon_cd.sh" >> ~/.bashrc
-RUN echo "export _colcon_cd_root=/opt/ros/humble/" >> ~/.bashrc
-
 RUN apt-get update -y && apt-get install -y x11-apps
 
 # Rust と cargo のインストール先を変更するための環境変数を設定
