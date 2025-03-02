@@ -82,6 +82,11 @@ ENV PATH="${CARGO_HOME}/bin:${PATH}"
 
 RUN cargo install urdf-viz
 
+RUN apt install ros-humble-slam-toolbox -y
+
+RUN apt install ros-humble-turtlebot3-teleop -y
+RUN apt install ros-humble-map-server -y
+
 # entrypoint.shスクリプトをコンテナに追加
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
